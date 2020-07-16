@@ -7,3 +7,5 @@ add_executable(code
         code.cpp
         pcpu.h
         )
+        
+add_compile_options(-O2)
