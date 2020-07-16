@@ -33,12 +33,14 @@ namespace ddl {
     private:
         dw pu;
         uint8_t dst[0x20000];
-        std::fstream src;
+        //std::fstream src;
 
+        /*
         void set_path(const std::string& pth) {
             if (src.is_open()) src.close();
             src.open(pth, std::ios::in);
         }
+         */
         // char->hex
         static uint8_t ctoui(char cur) {
             return (cur>='0'&&cur<='9') ? (cur-'0') : (cur-'A'+10);
@@ -47,16 +49,16 @@ namespace ddl {
         static bool ishx(char cur) {
             return (cur>='0'&&cur<='9')||(cur>='A'&&cur<='F');
         }
-        void read(const std::string& pth) {
-            set_path(pth);
+        void read() {
+            //set_path(pth);
 
             char cur;
-            while (src >> cur) {
+            while (std::cin >> cur) {
                 if (cur=='@') {
                     int cnt = 8;
                     pu = 0;
                     while (cnt--) {
-                        src >> cur;
+                        std::cin >> cur;
                         pu <<= 4u;
                         pu += ctoui(cur);
                     }
@@ -64,17 +66,17 @@ namespace ddl {
                 else if (ishx(cur)) {
                     dst[pu] = ctoui(cur);
                     dst[pu] <<= 4u;
-                    src >> cur;
+                    std::cin >> cur;
                     dst[pu] += ctoui(cur);
                     ++pu;
                 }
             }
 
-            src.close();
+            //src.close();
         }
 
     public:
-        Memory(const std::string& pth) : pu(0) {read(pth);}
+        Memory() : pu(0) {read();}
 
         dw readdw(dw index) {return *((uint32_t*)(dst + index));}
         uint16_t readwu(dw index) {return *((uint16_t*)(dst + index));}
@@ -201,8 +203,8 @@ namespace ddl {
         } TBPB; // 2-bit branch-prediction buffer
 
     public:
-        CPU(const std::string& pth)
-            : Reg(), Mem(pth), PC(0), TBPB() {
+        CPU()
+            : Reg(), Mem(), PC(0), TBPB() {
             id_ex.exit = false;
             id_ex.jumped = false;
             id_ex.stall = false;
