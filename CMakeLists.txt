@@ -3,7 +3,7 @@ project(RV32I)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(RV32I
+add_executable(code
         code.cpp
         pcpu.h
         )
