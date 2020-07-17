@@ -653,6 +653,7 @@ namespace ddl {
                 ex_mem.jumped = false;
                 id_ex.jumped = false;
                 if (id_ex.exit) id_ex.exit = false;
+                if (id_ex.stall) id_ex.stall = false;
 
                 stall1 = 3;
                 stall2 = 2;
