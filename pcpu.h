@@ -695,6 +695,8 @@ namespace ddl {
                         id_ex.rs1v = FRWRD_EX.val;
                     }
                 }
+                FRWRD_EX.enabled = false;
+                FRWRD_MEM.enabled = false;
             }
         }
 
