@@ -478,9 +478,9 @@ namespace ddl {
                        (id_ex.IR.func3==0 && id_ex.rs1v == id_ex.rs2v) // BEQ
                     || (id_ex.IR.func3==1 && id_ex.rs1v != id_ex.rs2v) //BNE
                     || (id_ex.IR.func3==4 && (int)id_ex.rs1v < (int)id_ex.rs2v) // BLT
-                    || (id_ex.IR.func3==5 && (int)id_ex.rs2v < (int)id_ex.rs1v) // BGE
+                    || (id_ex.IR.func3==5 && (int)id_ex.rs1v >= (int)id_ex.rs2v) // BGE
                     || (id_ex.IR.func3==6 && id_ex.rs1v < id_ex.rs2v) // BLTU
-                    || (id_ex.IR.func3==7 && id_ex.rs2v < id_ex.rs1v) // BGEU
+                    || (id_ex.IR.func3==7 && id_ex.rs1v >= id_ex.rs2v) // BGEU
                    ) {
                     if (!TBPB.picked()) {
                         ex_mem.jumped = true;
